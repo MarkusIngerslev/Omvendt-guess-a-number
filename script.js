@@ -25,21 +25,21 @@ function newGuess(GuessCount, GuessNumber) {
     const guessHtml = /*html*/ `
         <li id="guess-${GuessCount}">
             ${GuessCount}. Are you thinking of the number ${GuessNumber}?
-            <Button class="guess-low">Too Low</Button>
-            <Button class="guess-high">Too High</Button>
-            <Button class="guess-correct">Correct!</Button>
+            <Button id="guess-low">Too Low</Button>
+            <Button id="guess-high">Too High</Button>
+            <Button id="guess-correct">Correct!</Button>
         </li>
     `;
     document.querySelector("#guesses").insertAdjacentHTML("beforeend", guessHtml);
 
     document
-        .querySelector(`#guess-${GuessCount} .guess-low`)
+        .querySelector(`#guess-${GuessCount} #guess-low`)
         .addEventListener("click", () => handleGuess("low", GuessCount));
     document
-        .querySelector(`#guess-${GuessCount} .guess-high`)
+        .querySelector(`#guess-${GuessCount} #guess-high`)
         .addEventListener("click", () => handleGuess("high", GuessCount));
     document
-        .querySelector(`#guess-${GuessCount} .guess-correct`)
+        .querySelector(`#guess-${GuessCount} #guess-correct`)
         .addEventListener("click", () => handleGuess("correct", GuessCount));
 }
 
