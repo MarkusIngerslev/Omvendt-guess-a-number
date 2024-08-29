@@ -1,3 +1,18 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    height: 100vh;
+}
+.simpleText {
+    margin-top: 0;
+}
+
+hr {
+    width: 100%;
+}
+
 body {
     background-color: #f7f0d6;
     color: #333;
@@ -28,12 +43,4 @@ input {
 
 #guess-button:hover {
     background-color: #ff6347;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
 }
