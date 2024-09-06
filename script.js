@@ -3,7 +3,9 @@ window.addEventListener("load", initStart);
 
 // Global Variables
 let GuessCount = 0;
-let GuessNumber;
+let middle;
+let min = 1;
+let max = 100;
 
 function initStart() {
     console.log("JavaScript is live🎉🎉!");
@@ -16,15 +18,15 @@ function startGame() {
 }
 
 function newNumberGuess() {
-    GuessNumber = Math.floor(Math.random() * 100) + 1;
+    middle = Math.floor((min + max) / 2);
     GuessCount++;
-    newGuess(GuessCount, GuessNumber);
+    newGuess(GuessCount, middle);
 }
 
-function newGuess(GuessCount, GuessNumber) {
+function newGuess(GuessCount, middle) {
     const guessHtml = /*html*/ `
         <li id="guess-${GuessCount}">
-            ${GuessCount}. Are you thinking of the number ${GuessNumber}?
+            ${GuessCount}. Are you thinking of the number ${middle}?
             <Button id="guess-low">Too Low</Button>
             <Button id="guess-high">Too High</Button>
             <Button id="guess-correct">Correct!</Button>
@@ -47,12 +49,14 @@ function handleGuess(type, GuessCount) {
     const guessElement = document.querySelector(`#guess-${GuessCount}`);
 
     if (type === "low") {
-        guessElement.innerHTML = `${GuessCount}. ${GuessNumber} was too low. Trying again...`;
+        min = middle + 1;
+        guessElement.innerHTML = `${GuessCount}. ${middle} was too low. Trying again...`;
         newNumberGuess();
     } else if (type === "high") {
-        guessElement.innerHTML = `${GuessCount}. ${GuessNumber} was too high. Trying again...`;
+        max = middle - 1;
+        guessElement.innerHTML = `${GuessCount}. ${middle} was too high. Trying again...`;
         newNumberGuess();
     } else if (type === "correct") {
-        guessElement.innerHTML = `So your number was ${GuessNumber}. It only took me ${GuessCount} tries to guess correctly!`;
+        guessElement.innerHTML = `So your number was ${middle}. It only took me ${GuessCount} tries to guess correctly!`;
     }
 }
