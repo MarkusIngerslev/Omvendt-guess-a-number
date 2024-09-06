@@ -18,9 +18,20 @@ function startGame() {
 }
 
 function newNumberGuess() {
-    middle = Math.floor((min + max) / 2);
-    GuessCount++;
-    newGuess(GuessCount, middle);
+    if (min == max) {
+        document.querySelector("#guesses").insertAdjacentHTML(
+            "beforeend",
+            /*html */ `
+            <li id="guess-${GuessCount}">
+                So your number was ${min}... 😒
+            </li>
+            `
+        );
+    } else {
+        middle = Math.floor((min + max) / 2);
+        GuessCount++;
+        newGuess(GuessCount, middle);
+    }
 }
 
 function newGuess(GuessCount, middle) {
@@ -57,6 +68,10 @@ function handleGuess(type, GuessCount) {
         guessElement.innerHTML = `${GuessCount}. ${middle} was too high. Trying again...`;
         newNumberGuess();
     } else if (type === "correct") {
-        guessElement.innerHTML = `So your number was ${middle}. It only took me ${GuessCount} tries to guess correctly!`;
+        if (GuessCount <= 3) {
+            guessElement.innerHTML = `You number was ${middle} that was pretty easy to guess in only ${GuessCount} 😄`;
+        } else if (GuessCount > 3 && GuessCount <= 6) {
+            guessElement.innerHTML = `It only too me ${GuessCount} to guess your number was ${middle} thats pretty good😅 `;
+        }
     }
 }
